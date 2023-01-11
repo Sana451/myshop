@@ -8,11 +8,20 @@
 </head>
 <body>
 <div id="header">
-    <a href="/" class="logo">Мой магазин</a>
+    <a href="/" class="logo">Welcome to ShopBerries</a>
 </div>
+
 <div id="subheader">
     <div class="cart">
+    {% with total_items=cart|length %}
+        {% if total_items > 0 %}
+        В вашей вашей корзине:
+        <a href="{% url 'cart:cart_detail' %}">{{ total_items }} товаров<!--{{ total_items|pluralize }}-->,
+            на сумму {{ cart.get_total_price }} ₽</a>
+        {% elif not order %}
         Ваша корзина пока пуста
+        {% endif %}
+    {% endwith %}
     </div>
 </div>
 <div id="content">

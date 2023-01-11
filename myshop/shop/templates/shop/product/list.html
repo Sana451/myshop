@@ -11,7 +11,7 @@
     <h3>Категории</h3>
     <ul>
         <li {% if not category %}class="selected" {% endif %}>
-            <a href="{% url 'shop:product_list' %}">Все категории</a>
+            <a href="{% url 'shop:product_list' %}">Все товары</a>
         </li>
         {% for c in categories %}
         <li {% if category.slug == c.slug %}class="selected" {% endif %}>

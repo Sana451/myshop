@@ -60,6 +60,6 @@ Your shopping cart
 </table>
 <p class="text-right">
     <a href="{% url 'shop:product_list' %}" class="button light">Продолжить покупки</a>
-    <a href="#" class="button">Выйти</a>
+    <a href="{% url 'orders:order_create' %}" class="button">Перейти к оформлению</a>
 </p>
 {% endblock %}
