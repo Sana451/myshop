@@ -1,8 +1,9 @@
 from django.core.mail import send_mail
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import OrderCreateForm
 from .models import OrderItem, Order
 from cart.cart import Cart
+from django.urls import reverse
 from .tasks import order_created
 
 
@@ -22,9 +23,12 @@ def order_create(request):
             message = f'Dear {order.first_name},\n\n' \
                       f'You have successfully placed an order.' \
                       f'Your order ID is {order.id}.'
-            send_mail(subject, message, 'admin@myshop.com', [order.email])
-            # order_created.delay(order.id)
-            return render(request, 'orders/order/created.html', {'order': order})
+            send_mail(subject, message, 'admin@myShopBerries.com', [order.email])
+            order_created.delay(order.id)
+            # set the order in the session
+            request.session['order_id'] = order.id
+            # redirect for payment
+            return redirect(reverse('payment:process'))
     else:
         form = OrderCreateForm()
     return render(request, 'orders/order/create.html', {'form': form})
