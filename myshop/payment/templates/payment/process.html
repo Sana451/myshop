@@ -2,26 +2,27 @@
 {% load static %}
 
 {% block title %}
-  Pay your order
+Pay your order
 {% endblock %}
 
 {% block content %}
-  <h1>Описание заказа</h1>
-  <table class="cart">
+<h1>Описание заказа</h1>
+<table class="cart">
     <thead>
-      <tr>
+    <tr>
         <th>Изображение</th>
         <th>Товар</th>
         <th>Цена за единицу</th>
         <th>Количество</th>
         <th>Общая стоимость</th>
-      </tr>
+    </tr>
     </thead>
+
     <tbody>
     {% for item in order.items.all %}
-      <tr class="row{% cycle '1' '2' %}">
+    <tr class="row{% cycle '1' '2' %}">
         <td>
-          <img src="{% if item.product.image %}{{ item.product.image.url }}
+            <img src="{% if item.product.image %}{{ item.product.image.url }}
           {% else %}{% static 'img/no_image.png' %}
           {% endif %}">
         </td>
@@ -29,16 +30,43 @@
         <td class="num">{{ item.price }} ₽</td>
         <td class="num">{{ item.quantity }}</td>
         <td class="num"><b>{{ item.get_cost }} ₽</b></td>
-      </tr>
-    {% endfor %}
-    <tr class="total">
-      <td colspan="4">Сумма заказа</td>
-      <td class="num">{{ order.get_total_cost }} ₽</td>
     </tr>
+    {% endfor %}
+
+    {% if order.coupon %}
+    <tr class="subtotal">
+        <td>Итого без учёта скидки</td>
+        <td colspan="3"></td>
+        <td class="num">
+            {{ order.get_total_cost_before_discount|floatformat:2 }} ₽
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Купон: {{ order.coupon.code }}
+            (скидка {{ order.discount }}%)
+        </td>
+        <td colspan="3"></td>
+        <td class="num neg">
+            - {{ order.get_discount|floatformat:2 }} ₽
+        </td>
+    </tr>
+    {% endif %}
+
+    <tr class="total">
+        <td>Итого к оплате {% if order.coupon %}(с учётом скидок){% endif %}</td>
+        <td colspan="3"></td>
+        <td class="num">
+            {{ order.get_total_cost|floatformat:2 }} ₽
+        </td>
+    </tr>
+
     </tbody>
-  </table>
+</table>
+
 <form action="{% url 'payment:process' %}" method="post">
-  <input type="submit" value="Оплатить">
-  {% csrf_token %}
+    <input type="submit" value="Оплатить">
+    {% csrf_token %}
 </form>
+
 {% endblock %}
