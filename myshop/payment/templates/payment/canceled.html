@@ -1,6 +1,9 @@
 {% extends "shop/base.html" %}
-{% block title %}Payment canceled{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Payment canceled" %}{% endblock %}
 {% block content %}
-    <h1>Ваш платеж не был обработан</h1>
-    <p>Возникла проблема с обработкой вашего платежа</p>
+    <h1>{% trans "Payment canceled" %}</h1>
+<!--    <h1>Ваш платеж не был обработан</h1>-->
+    <p>{% trans "Your payment has not been processed" %}</p>
+<!--    <p>Возникла проблема с обработкой вашего платежа</p>-->
 {% endblock %}

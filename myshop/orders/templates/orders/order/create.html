@@ -1,13 +1,16 @@
 {% extends "shop/base.html" %}
+{% load i18n %}
 
 {% block title %}
-    Checkout
+    {% trans "Checkout" %}
 {% endblock %}
 
 {% block content %}
-<h1>Размещение заказа</h1>
+<h1>{% trans "Checkout" %}</h1>
+<!--<h1>Размещение заказа</h1>-->
 <div class="order-info">
-    <h3>Ваш заказ</h3>
+    <h3>{% trans "Your order" %}</h3>
+<!--    <h3>Ваш заказ</h3>-->
     <ul>
         {% for item in cart %}
         <li>{{ item.quantity}} x {{ item.product.name }}
@@ -15,18 +18,22 @@
         </li>
         {% if cart.coupon %}
             <li>
-            "{{ cart.coupon.code }}" (скидка {{ cart.coupon.discount }}%)
-            <span class="neg">- {{ cart.get_discount|floatformat:2 }} ₽</span>
+                {% blocktrans with code=cart.coupon.code discount=cart.coupon.discount %}
+                "{{ code }}" ({{ discount }}% off)
+                {% endblocktrans %}
+<!--            "{{ cart.coupon.code }}" (скидка {{ cart.coupon.discount }}%)-->
+<!--            <span class="neg">- {{ cart.get_discount|floatformat:2 }} ₽</span>-->
             </li>
         {% endif %}
         {% endfor %}
     </ul>
-    <p>Итого {% if cart.coupon %}(с учётом скидок){% endif %}: {{ cart.get_total_price_after_discount|floatformat:2 }} ₽</p>
+    <p>{% trans "Total" %}: ${{cart.get_total_price_after_discount|floatformat:2 }}</p>
+    <!--    <p>Итого {% if cart.coupon %}(с учётом скидок){% endif %}: {{ cart.get_total_price_after_discount|floatformat:2 }} ₽</p>-->
 </div>
 
 <form method="post" class="order-form">
     {{ form.as_p }}
-    <input type="submit" value="Оплатить онлайн">
+    <input type="submit" value="{% trans 'Place order' %}">
     {% csrf_token %}
 </form>
 {% endblock %}

@@ -1,20 +1,27 @@
 {% extends 'shop/base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}
-Pay your order
+{% trans "Pay your order" %}
 {% endblock %}
 
 {% block content %}
-<h1>Описание заказа</h1>
+<h1>{% trans "Order summary" %}</h1>
+<!--<h1>Описание заказа</h1>-->
 <table class="cart">
     <thead>
     <tr>
-        <th>Изображение</th>
-        <th>Товар</th>
-        <th>Цена за единицу</th>
-        <th>Количество</th>
-        <th>Общая стоимость</th>
+        <th>{% trans "Image" %}</th>
+        <th>{% trans "Product" %}</th>
+        <th>{% trans "Price" %}</th>
+        <th>{% trans "Quantity" %}</th>
+        <th>{% trans "Total" %}</th>
+<!--        <th>Изображение</th>-->
+<!--        <th>Товар</th>-->
+<!--        <th>Цена за единицу</th>-->
+<!--        <th>Количество</th>-->
+<!--        <th>Общая стоимость</th>-->
     </tr>
     </thead>
 
@@ -35,7 +42,8 @@ Pay your order
 
     {% if order.coupon %}
     <tr class="subtotal">
-        <td>Итого без учёта скидки</td>
+        <td>{% trans "Subtotal" %}</td>
+<!--        <td>Итого без учёта скидки</td>-->
         <td colspan="3"></td>
         <td class="num">
             {{ order.get_total_cost_before_discount|floatformat:2 }} ₽
@@ -43,8 +51,11 @@ Pay your order
     </tr>
     <tr>
         <td>
-            Купон: {{ order.coupon.code }}
-            (скидка {{ order.discount }}%)
+            {% blocktrans with code=order.coupon.code discount=order.discount %}
+            "{{ code }}" ({{ discount }}% off)
+            {% endblocktrans %}
+<!--            Купон: {{ order.coupon.code }}-->
+<!--            (скидка {{ order.discount }}%)-->
         </td>
         <td colspan="3"></td>
         <td class="num neg">
@@ -54,7 +65,8 @@ Pay your order
     {% endif %}
 
     <tr class="total">
-        <td>Итого к оплате {% if order.coupon %}(с учётом скидок){% endif %}</td>
+        <td>{% trans "Total" %}</td>
+<!--        <td>Итого к оплате {% if order.coupon %}(с учётом скидок){% endif %}</td>-->
         <td colspan="3"></td>
         <td class="num">
             {{ order.get_total_cost|floatformat:2 }} ₽
@@ -65,7 +77,8 @@ Pay your order
 </table>
 
 <form action="{% url 'payment:process' %}" method="post">
-    <input type="submit" value="Оплатить">
+    <input type="submit" value="{% trans 'Pay now' %}">
+<!--    <input type="submit" value="Оплатить">-->
     {% csrf_token %}
 </form>
 

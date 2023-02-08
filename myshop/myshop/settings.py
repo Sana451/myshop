@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+from django.utils.translation import gettext_lazy as _
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,11 +40,16 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig',
+    'coupons.apps.CouponsConfig',
+    'rosetta',
+    'parler',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -102,7 +109,16 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
+LANGUAGES = [
+    ('en', _('English')),
+    ('es', _('Spanish')),
+    ('ru', _('Russian')),
+]
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
 
 TIME_ZONE = 'UTC'
 
@@ -114,6 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -126,3 +143,16 @@ MEDIA_ROOT = BASE_DIR / 'media'
 CART_SESSION_ID = 'cart'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Stripe settings
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51MOu2hBEIv7j3XF3cy2iPYA5Hy9oGi6thCY6RCf337trjpIbGvEx5mZvs3riEE13HdbZMvM2DQSLisRFcw8IvDbv00s8RV93TS'
+STRIPE_SECRET_KEY = 'sk_test_51MOu2hBEIv7j3XF3ZZwclG2ekgfUpNEIpFH9WqdaMnPaLhWfTh3omttdqv2iNqItciFneZ9ubsSmUsz9RhTWQjaz007PbUX3oQ'
+STRIPE_API_VERSION = '2022-08-01'
+
+# This is your Stripe CLI webhook secret for testing your endpoint locally.
+STRIPE_WEBHOOK_SECRET = 'whsec_891ad6da4c2022f5dd6b642120ccf2076ceb088af5a789ba964ec424544df933'
+
+# Redis settings
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 1
