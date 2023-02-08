@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-03 06:12+0300\n"
+"PO-Revision-Date: 2023-02-03 06:26+0000\n"
+"Last-Translator:   <sana451@mail.ru>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: .\orders\models.py:14
+msgid "first name"
+msgstr "фамилия"
+
+#: .\orders\models.py:15
+msgid "last name"
+msgstr "имя"
+
+#: .\orders\models.py:16
+msgid "e-mail"
+msgstr "электронная почта"
+
+#: .\orders\models.py:17
+msgid "address"
+msgstr "адрес"
+
+#: .\orders\models.py:18
+msgid "postal code"
+msgstr "почтовый индекс"
+
+#: .\orders\models.py:19
+msgid "city"
+msgstr "город"
+
+#: .\orders\templates\orders\order\create.html:5
+#: .\orders\templates\orders\order\create.html:9
+msgid "Checkout"
+msgstr "Перейти к оформлению"
+
+#: .\orders\templates\orders\order\create.html:12
+msgid "Your order"
+msgstr "Ваш заказ"
+
+#: .\orders\templates\orders\order\create.html:21
+#, python-format
+msgid ""
+"\n"
+"                \"%(code)s\" (%(discount)s%% off)\n"
+"                "
+msgstr ""
+"\n"
+"\"%(code)s\" (%(discount)s%% скидка)"
+
+#: .\orders\templates\orders\order\create.html:30
+#: .\orders\templates\orders\order\pdf.html:58
+msgid "Total"
+msgstr "Итого"
+
+#: .\orders\templates\orders\order\create.html:36
+msgid "Place order"
+msgstr "Перейти к оплате"
+
+#: .\orders\templates\orders\order\pdf.html:5
+msgid "Invoice no."
+msgstr "Заказ №"
+
+#: .\orders\templates\orders\order\pdf.html:10
+msgid "Bill to"
+msgstr "Счёт для"
+
+#: .\orders\templates\orders\order\pdf.html:17
+msgid "Items bought"
+msgstr "С этим товаром покупают"
+
+#: .\orders\templates\orders\order\pdf.html:21
+msgid "Product"
+msgstr "Товар"
+
+#: .\orders\templates\orders\order\pdf.html:22
+msgid "Price"
+msgstr "Цена"
+
+#: .\orders\templates\orders\order\pdf.html:23
+msgid "Quantity"
+msgstr "Количество"
+
+#: .\orders\templates\orders\order\pdf.html:24
+msgid "Cost"
+msgstr "Стоимость"
+
+#: .\orders\templates\orders\order\pdf.html:39
+msgid "Subtotal"
+msgstr "Промежуточный итог"
+
+#: .\orders\templates\orders\order\pdf.html:46
+#, python-format
+msgid ""
+"\n"
+"            \"%(code)s\" (%(discount)s%% off)\n"
+"            "
+msgstr ""
+"\n"
+"\"%(code)s\" (%(discount)s%% скидка)"
+
+#: .\orders\templates\orders\order\pdf.html:65
+msgid "Pending payment"
+msgstr "Ожидается платёж"
+
+#: .\orders\urls.py:11
+msgid "create/"
+msgstr "оформление/"
